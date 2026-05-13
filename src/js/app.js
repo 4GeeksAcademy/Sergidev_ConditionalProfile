@@ -27,23 +27,33 @@ function render(variables = {}) {
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
+  let nameLastName = getNameLastName();
+  let cityCountry = getCityCountry();
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${nameLastName}</h1>
+          <h2>${variables.role}</h2>
+          <h3>${cityCountry}</h3>
+          <ul class="${variables.socialMediaPosition}">
+            <li><a href="${variables.twitter}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="${variables.github}"target="_blank"><i class="fab fa-github"></i></a></li>
+            <li><a href="${variables.linkedin}"target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="${variables.instagram}"target="_blank"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
+}
+
+function getNameLastName() {
+  return window.variables.name + " " + window.variables.lastName;
+}
+
+function getCityCountry() {
+  return window.variables.city + ", " + window.variables.country;
 }
 
 /**
@@ -54,21 +64,23 @@ window.onload = function() {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
     // this is the image's url that will be used as a background for the profile cover
-    background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
+    background:
+      "https://images.unsplash.com/photo-1549317336-206569e8475c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     // this is the url for the profile avatar
-    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    avatarURL: "https://imgur.com/KrLm4Pq.jpg",
     // social media bar position (position-left or position-right)
     socialMediaPosition: "position-right",
     // social media usernames
-    twitter: null,
-    github: null,
-    linkedin: null,
-    instagram: null,
-    name: null,
-    lastName: null,
-    role: null,
-    country: null,
-    city: null
+    twitter: "https://x.com/WolveshireS",
+    github: "https://github.com/Sergidev",
+    linkedin:
+      "https://www.linkedin.com/in/sergi-villalobos-gasc%C3%B3n-791278192",
+    instagram: "https://www.instagram.com",
+    name: "Sergi",
+    lastName: "Villalobos",
+    role: "Code Destroyer",
+    country: "Spain",
+    city: "Barcelona"
   };
   render(window.variables); // render the card for the first time
 
